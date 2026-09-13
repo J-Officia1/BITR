@@ -94,7 +94,7 @@ Health check endpoint verifying backend service state.
 ### 1. Installation
 Clone the repository and install dependencies:
 ```bash
-git clone https://github.com/your-username/BITR.git
+git clone https://github.com/J-Officia1/BITR.git
 cd BITR-AI
 pip install -r requirements.txt
 ```
