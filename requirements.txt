@@ -1,0 +1,11 @@
+flask
+flask-cors
+flask-limiter
+vaderSentiment
+textblob
+scikit-learn
+joblib
+pandas
+numpy
+langdetect
+python-dotenv

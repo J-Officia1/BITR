@@ -1,0 +1,19 @@
+# Python cache and byte-compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environments & Dependencies
+venv/
+env/
+ENV/
+.venv
+
+# Environment variables
+.env
+
+# System & IDE files
+.DS_Store
+.vscode/
+.idea/
+*.log

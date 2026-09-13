@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BITR AI | Binary Intelligence for Truth Reconstruction</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            night: "#07111f",
+            steel: "#12324f",
+            cyan: "#48d9ff",
+            mint: "#5cf2b5",
+            amber: "#ffc857",
+            coral: "#ff6b6b",
+            cloud: "#eef6fb"
+          },
+          fontFamily: {
+            display: ["Poppins", "ui-sans-serif", "system-ui"],
+            body: ["Manrope", "ui-sans-serif", "system-ui"]
+          },
+          boxShadow: {
+            glow: "0 20px 60px rgba(72, 217, 255, 0.18)"
+          }
+        }
+      }
+    };
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="min-h-screen bg-night font-body text-white">
+  <div class="page-shell">
+    <div class="ambient ambient-one"></div>
+    <div class="ambient ambient-two"></div>
+
+    <header class="mx-auto max-w-7xl px-6 pb-12 pt-8 lg:px-10">
+      <nav class="glass-panel flex items-center justify-between rounded-full px-5 py-4">
+        <div class="logo-frame flex items-center gap-3">
+          <img
+            src="assets/Logo.png"
+            alt="BITR AI logo"
+            class="site-logo"
+          >
+          <details class="advanced-config nav-advanced">
+            <summary>Advanced</summary>
+            <label class="api-config">
+              <span>API Base URL</span>
+              <input id="apiBaseUrl" type="text" value="http://127.0.0.1:5000" placeholder="http://127.0.0.1:5000">
+            </label>
+          </details>
+        </div>
+      </nav>
+
+      <section class="pt-12">
+        <div class="space-y-6 reveal reveal-up">
+          <p class="inline-flex rounded-full border border-cyan/20 bg-white/5 px-4 py-2 text-sm text-cyan">
+            Binary Intelligence for Truth Reconstruction
+          </p>
+          <div class="space-y-4">
+            <h1 class="font-display text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:text-6xl">
+              Detect manipulation patterns before they shape decisions.
+            </h1>
+            <p class="text-lg leading-8 text-slate-300">
+              Paste suspicious text from emails, forwards, alerts, or articles. BITR AI scores credibility, surfaces manipulation tactics, and highlights psychological risk in seconds.
+            </p>
+          </div>
+          <div class="flex flex-wrap gap-3 text-sm text-slate-200">
+            <span class="chip">Fear triggers</span>
+            <span class="chip">Authority impersonation</span>
+            <span class="chip">Scarcity & urgency</span>
+            <span class="chip">Social proof</span>
+            <span class="chip">Emotional amplification</span>
+          </div>
+        </div>
+      </section>
+    </header>
+
+    <main class="mx-auto max-w-7xl px-6 pb-16 lg:px-10">
+      <section class="grid gap-8 lg:grid-cols-[1.02fr_0.98fr] lg:items-start">
+        <div id="inputPanel" class="glass-panel reveal reveal-up flex flex-col rounded-[2rem] p-6 lg:p-8">
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <p class="text-sm uppercase tracking-[0.3em] text-slate-300">Input</p>
+              <h2 class="mt-2 font-display text-2xl font-bold">Analyze suspicious text</h2>
+            </div>
+          </div>
+
+          <form id="analysisForm" class="mt-6 flex flex-1 flex-col space-y-5">
+            <label class="block">
+              <span class="mb-3 block text-sm font-semibold text-slate-200">Text to inspect</span>
+              <textarea
+                id="sourceText"
+                rows="6"
+                class="w-full rounded-[1.5rem] border border-white/10 bg-slate-950/70 px-5 py-4 text-base leading-7 text-white outline-none transition placeholder:text-slate-500 focus:border-cyan/50 focus:ring-2 focus:ring-cyan/20"
+                placeholder="Paste a message, news excerpt, forwarded alert, or email here..."
+              >URGENT: Your bank account will be blocked within 30 minutes unless you verify now. This notice comes from the RBI cyber cell. Thousands have already completed the process successfully. Click immediately to avoid legal action.</textarea>
+            </label>
+
+            <div class="action-row">
+              <button id="demoButton" type="button" class="secondary-button">
+                Load Demo Result
+              </button>
+              <button id="analyzeButton" type="submit" class="primary-button">
+                Analyze Text
+              </button>
+              <button id="resetButton" type="button" class="secondary-button">
+                Reset
+              </button>
+            </div>
+          </form>
+
+          <div id="statusBanner" class="status-banner hidden"></div>
+        </div>
+
+        <div id="telemetryPanel" class="glass-panel reveal reveal-up flex flex-col rounded-[2rem] p-6 lg:p-8">
+          <div class="flex items-center justify-between gap-4">
+            <div>
+              <p class="text-sm uppercase tracking-[0.3em] text-slate-300">Telemetry</p>
+              <h2 class="mt-2 font-display text-2xl font-bold">Category pressure map</h2>
+            </div>
+            <span class="chip chip-soft">Live from API</span>
+          </div>
+          <div id="chartWrap" class="mt-6 min-h-[320px] flex-1">
+            <canvas id="categoryChart"></canvas>
+          </div>
+        </div>
+      </section>
+
+      <section class="mt-8 grid gap-4 md:grid-cols-3">
+        <article class="metric-card reveal reveal-up result-card">
+          <p class="metric-label">Manipulation Score</p>
+          <p id="manipulationScore" class="metric-value text-coral">0%</p>
+          <div class="progress-rail"><div id="manipulationBar" class="progress-fill bg-coral"></div></div>
+        </article>
+        <article class="metric-card reveal reveal-up result-card">
+          <p class="metric-label">Authenticity Score</p>
+          <p id="authenticityScore" class="metric-value text-mint">0%</p>
+          <div class="progress-rail"><div id="authenticityBar" class="progress-fill bg-mint"></div></div>
+        </article>
+        <article class="metric-card reveal reveal-up result-card">
+          <p class="metric-label">Psychological Risk</p>
+          <p id="riskLevel" class="metric-value text-amber">Low</p>
+          <p id="guidancePreview" class="mt-3 text-sm leading-6 text-slate-300">Actionable guidance appears here after analysis.</p>
+        </article>
+      </section>
+
+      <section class="mt-8 space-y-8">
+        <div class="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
+          <div class="glass-panel reveal reveal-up rounded-[2rem] p-6 detail-card">
+            <p class="text-sm uppercase tracking-[0.3em] text-slate-300">Detected Tactics</p>
+            <div id="tacticsGrid" class="mt-5 space-y-3"></div>
+          </div>
+
+          <div class="grid gap-8">
+            <div class="glass-panel reveal reveal-up rounded-[2rem] p-6 detail-card">
+              <p class="text-sm uppercase tracking-[0.3em] text-slate-300">Guidance</p>
+              <h3 class="mt-2 font-display text-2xl font-bold">Recommended next step</h3>
+              <p id="guidanceText" class="mt-4 text-base leading-8 text-slate-200">
+                Paste text and run an analysis to receive a credibility summary, category breakdown, and safety guidance.
+              </p>
+            </div>
+
+            <div class="glass-panel reveal reveal-up rounded-[2rem] p-6 detail-card">
+              <p class="text-sm uppercase tracking-[0.3em] text-slate-300">Risk interpretation</p>
+              <h3 class="mt-2 font-display text-2xl font-bold">How to read the result</h3>
+              <div class="mt-6 grid gap-3">
+                <div class="risk-band">
+                  <span class="risk-swatch bg-mint"></span>
+                  <p><strong>Low:</strong> Minimal coercive pressure or impersonation detected.</p>
+                </div>
+                <div class="risk-band">
+                  <span class="risk-swatch bg-amber"></span>
+                  <p><strong>Moderate:</strong> Some persuasive manipulation patterns are present.</p>
+                </div>
+                <div class="risk-band">
+                  <span class="risk-swatch bg-coral"></span>
+                  <p><strong>High:</strong> Strong fear, urgency, or deceptive authority indicators detected.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
