@@ -1,13 +1,9 @@
 # BITR Manipulation Keyword Lists
 
-# Each list contains words and phrases that indicate a specific manipulation
-# tactic. The detector.py file imports these and checks if they appear in
-# the user's input text.
+#Imported by detector.py
 
-# -----------------------------------------------------------------------------
 # 1. FEAR TRIGGERS (weight: 0.30)
-# Goal: Language designed to activate panic and bypass rational thinking.
-# -----------------------------------------------------------------------------
+
 FEAR_TRIGGERS = [
     "danger", "deadly", "fatal", "emergency", "crisis", "catastrophe", "alert", 
     "warning", "red alert", "maximum alert", "arrest warrant", "legal action",
@@ -23,10 +19,9 @@ FEAR_TRIGGERS = [
     "calls are being recorded by government"
 ]
 
-# -----------------------------------------------------------------------------
+
 # 2. AUTHORITY IMPERSONATION (weight: 0.25)
-# Goal: Use the names of trusted organizations to bypass skepticism.
-# -----------------------------------------------------------------------------
+
 AUTHORITY_IMPERSONATION = [
     "official notice", "government order", "ministry of health", "world health organization",
     "who", "unicef", "united nations", "fbi", "cia", "nasa", "official report",
@@ -39,10 +34,9 @@ AUTHORITY_IMPERSONATION = [
     "rbi governor", "department of telecommunications", "dot notice"
 ]
 
-# -----------------------------------------------------------------------------
+
 # 3. SCARCITY / URGENCY PRESSURE (weight: 0.20)
-# Goal: Force a quick decision by making the user feel they will lose out.
-# -----------------------------------------------------------------------------
+
 SCARCITY_URGENCY = [
     "act now", "last chance", "limited time", "offer ends", "hurry", "urgent",
     "immediately", "within 24 hours", "before it's too late", "expires today",
@@ -53,10 +47,9 @@ SCARCITY_URGENCY = [
     "onam bumper free ticket", "last date for scholarship", "kyc update pending"
 ]
 
-# -----------------------------------------------------------------------------
+
 # 4. SOCIAL PROOF MANIPULATION (weight: 0.15)
-# Goal: Use perceived popularity to make a claim seem legitimate.
-# -----------------------------------------------------------------------------
+
 SOCIAL_PROOF = [
     "going viral", "everyone is talking", "millions of people", "trending now",
     "don't be the last to know", "shared by thousands", "breaking the internet",
@@ -67,10 +60,9 @@ SOCIAL_PROOF = [
     "don't break the chain", "forwarded as received", "keralathile ellavarum kaanuka"
 ]
 
-# -----------------------------------------------------------------------------
+
 # 5. EMOTIONAL AMPLIFICATION (weight: 0.10)
-# Goal: Use extreme adjectives to trigger shock, anger, or sadness.
-# -----------------------------------------------------------------------------
+
 EMOTIONAL_AMPLIFICATION = [
     "shocking", "unbelievable", "heartbreaking", "disgusting", "outrageous",
     "miracle", "amazing", "you won't believe", "must see", "shameful",
